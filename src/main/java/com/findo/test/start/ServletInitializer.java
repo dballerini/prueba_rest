@@ -1,4 +1,4 @@
-package com.findo.test.Prueba;
+package com.findo.test.start;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
