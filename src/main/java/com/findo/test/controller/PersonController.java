@@ -22,17 +22,17 @@ public class PersonController {
 	}
 
 	@GetMapping(value = "/person")
-	public ResponseEntity getBucket(@RequestParam(value = "id") Long id) {
+	public ResponseEntity getPerson(@RequestParam(value = "id") Long id) {
 		return null;// ResponseEntity.ok(itemToReturn);
 	}
 
 	@PostMapping(value = "/")
-	public ResponseEntity addToBucketList(@RequestParam(value = "name") String name) {
+	public ResponseEntity addPerson(@RequestParam(value = "name") String name) {
 		return null;// ResponseEntity.ok(myBucketList);
 	}
 
 	@PutMapping(value = "/")
-	public ResponseEntity updateBucketList(@RequestParam(value = "name") String name, @RequestParam(value = "id") Long id) {
+	public ResponseEntity updatePerson(@RequestParam(value = "name") String name, @RequestParam(value = "id") Long id) {
 		return null;// ResponseEntity.ok(myBucketList);
 	}
 

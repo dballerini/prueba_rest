@@ -22,19 +22,19 @@ public class MovieController {
     }
     
     @GetMapping(value = "/movie")
-    public ResponseEntity getBucket(@RequestParam(value="id") Long id) {
+    public ResponseEntity getMovie(@RequestParam(value="id") Long id) {
     	return null;//ResponseEntity.ok(itemToReturn);
     }
     @PostMapping(value = "/")
-    public ResponseEntity addToBucketList(@RequestParam(value="name") String name) {
+    public ResponseEntity addMovie(@RequestParam(value="name") String name) {
     	return null;// ResponseEntity.ok(myBucketList);
     }
     @PutMapping(value = "/")
-    public ResponseEntity updateBucketList(@RequestParam(value="name") String name, @RequestParam(value="id") Long id) {
+    public ResponseEntity updateMovie(@RequestParam(value="name") String name, @RequestParam(value="id") Long id) {
         return null;//ResponseEntity.ok(myBucketList);
     }
     @DeleteMapping(value = "/")
-    public ResponseEntity removeBucketList(@RequestParam(value="id") Long id) {
+    public ResponseEntity removeMovie(@RequestParam(value="id") Long id) {
         return null;//ResponseEntity.ok(myBucketList);
     }
 }
