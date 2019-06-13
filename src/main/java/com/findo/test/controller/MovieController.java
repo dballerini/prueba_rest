@@ -1,5 +1,8 @@
 package com.findo.test.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.findo.test.model.Movie;
+import com.findo.test.repository.MovieRepository;
+
 @RestController
-@RequestMapping("movies")
+@RequestMapping("/movies")
 public class MovieController {
 
+    @Autowired
+    private MovieRepository movieRepository;
+	
     public MovieController(){
     }
     
     @GetMapping(value = "/")
-    public ResponseEntity index() {
-    	return ResponseEntity.ok("Exito");//ResponseEntity.ok();
+    public Page<Movie> index(Pageable pageable) {
+		return movieRepository.findAll(pageable);
     }
     
     @GetMapping(value = "/movie")
