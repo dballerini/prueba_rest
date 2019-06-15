@@ -1,4 +1,4 @@
-package com.findo.test.model;
+package com.findo.prueba.model;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Movie {
@@ -15,7 +16,11 @@ public class Movie {
 	private Long id;
 	private String title;
 	private Integer releaseYear;
+	
+	@OneToMany
 	private List<Person> directors;
+	
+	@OneToMany
 	private List<Person> producers;
 
 	public Long getId() {

@@ -1,9 +1,9 @@
-package com.findo.test.repository;
+package com.findo.prueba.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.findo.test.model.Movie;
+import com.findo.prueba.model.Movie;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {

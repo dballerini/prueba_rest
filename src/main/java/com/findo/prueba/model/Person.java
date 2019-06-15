@@ -1,4 +1,4 @@
-package com.findo.test.model;
+package com.findo.prueba.model;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Person {
@@ -16,8 +17,14 @@ public class Person {
 	private String lastName;
 	private String firstName;
 	private String aliases;
+	
+	@OneToMany
 	private List<Movie> asAct;
+	
+	@OneToMany
 	private List<Movie> asDirector;
+	
+	@OneToMany
 	private List<Movie> asProducer;
 
 	public Long getId() {

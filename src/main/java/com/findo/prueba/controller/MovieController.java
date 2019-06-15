@@ -1,8 +1,9 @@
-package com.findo.test.controller;
+package com.findo.prueba.controller;
+
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,38 +13,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.findo.test.model.Movie;
-import com.findo.test.repository.MovieRepository;
+import com.findo.prueba.model.Movie;
+import com.findo.prueba.repository.MovieRepository;
 
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
 
-    @Autowired
-    private MovieRepository movieRepository;
-	
-    public MovieController(){
-    }
-    
-    @GetMapping(value = "/")
-    public Page<Movie> index(Pageable pageable) {
-		return movieRepository.findAll(pageable);
-    }
-    
-    @GetMapping(value = "/movie")
-    public ResponseEntity getMovie(@RequestParam(value="id") Long id) {
-    	return null;//ResponseEntity.ok(itemToReturn);
-    }
-    @PostMapping(value = "/")
-    public ResponseEntity addMovie(@RequestParam(value="name") String name) {
-    	return null;// ResponseEntity.ok(myBucketList);
-    }
-    @PutMapping(value = "/")
-    public ResponseEntity updateMovie(@RequestParam(value="name") String name, @RequestParam(value="id") Long id) {
-        return null;//ResponseEntity.ok(myBucketList);
-    }
-    @DeleteMapping(value = "/")
-    public ResponseEntity removeMovie(@RequestParam(value="id") Long id) {
-        return null;//ResponseEntity.ok(myBucketList);
-    }
+	@Autowired
+	private MovieRepository movieRepository;
+
+	@GetMapping(value = "")
+	public ResponseEntity<List<Movie>> index() {
+		return ResponseEntity.ok(movieRepository.findAll());
+	}
+
+	@GetMapping(value = "/movie")
+	public ResponseEntity<Movie> getMovie(@RequestParam(value = "id") Long id) {
+		Optional<Movie> movie = movieRepository.findById(id);
+		if (!movie.isPresent()) {
+			ResponseEntity.badRequest().build();
+		}
+
+		return ResponseEntity.ok(movie.get());
+	}
+
+	@PostMapping(value = "")
+	public ResponseEntity<Movie> addMovie(@RequestParam(value = "movie") Movie movie) {
+		return ResponseEntity.ok(movieRepository.save(movie));
+	}
+
+	@PutMapping(value = "")
+	public ResponseEntity<Movie> updateMovie(@RequestParam(value = "movie") Movie movie) {
+		if (!movieRepository.findById(movie.getId()).isPresent()) {
+			ResponseEntity.badRequest().build();
+		}
+
+		return ResponseEntity.ok(movieRepository.save(movie));
+	}
+
+	@DeleteMapping(value = "")
+	public ResponseEntity<Movie> removeMovie(@RequestParam(value = "id") Long id) {
+		if (!movieRepository.findById(id).isPresent()) {
+			ResponseEntity.badRequest().build();
+		}
+
+		movieRepository.deleteById(id);
+
+		return ResponseEntity.ok().build();
+	}
 }
