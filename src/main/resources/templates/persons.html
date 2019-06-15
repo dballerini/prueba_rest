@@ -86,7 +86,7 @@
 			</div>
 			<div class="form-group">
 				<label for="add-aliases">Aliases</label>
-				<input class="form-control" id="add-aliases"  required></input>
+				<input class="form-control" id="add-aliases" v-model="person.aliases" required></input>
 			</div>
 			<button type="submit" class="btn btn-primary">Create</button>
 			<a class="btn btn-default"> <router-link to="/">Cancel</router-link>
