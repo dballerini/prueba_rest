@@ -20,9 +20,9 @@
 
 	<template id="person">
 	<div>
-		<h2>{{ person.title }}</h2>
-		<b>Release Year: </b>
-		<div>{{ person.releaseYear }}</div>
+		<h2>{{ person.firstName }} {{ person.lastName }}</h2>
+		<b>Aliases: </b>
+		<div>{{ person.aliases }}</div>
 		<br /> <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
 		<a> <router-link to="/">Back to person list</router-link>
 		</a>
@@ -46,8 +46,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Release Year</th>
+					<th>Name</th>
+					<th></th>
 					<th class="col-sm-2">Actions</th>
 				</tr>
 			</thead>
@@ -56,10 +56,9 @@
 					<!-- tr v-for="person in persons" -->
 					<!-- tr v-for="person in persons | filterBy searchKey in 'title'" -->
 					<td><a> <router-link
-								:to="{name: 'person', params: {person_id: person.id}}">{{
-							person.title }}</router-link>
+								:to="{name: 'person', params: {person_id: person.id}}">{{ person.firstName }} {{ person.lastName }}</router-link>
 					</a></td>
-					<td>{{ person.releaseYear }}</td>
+					<td>{{ person.aliases }}</td>
 					
 					<td><a class="btn btn-warning btn-xs"> <router-link
 								:to="{name: 'person-edit', params: {person_id: person.id}}">Edit</router-link>
@@ -78,13 +77,16 @@
 		<h2>Add new person</h2>
 		<form @submit="createPerson">
 			<div class="form-group">
-				<label for="add-name">Title</label> <input class="form-control"
-					id="add-name" v-model="person.title" required />
+				<label for="add-firstname">First Name</label> <input class="form-control"
+					id="add-name" v-model="person.firstName" required />
 			</div>
 			<div class="form-group">
-				<label for="add-releaseyear">ReleaseYear</label>
-				<input class="form-control" id="add-releaseyear" 
-					v-model="person.releaseYear" required></input>
+				<label for="add-lastname">Last Name</label> <input class="form-control"
+					id="add-name" v-model="person.lastName" required />
+			</div>
+			<div class="form-group">
+				<label for="add-aliases">Aliases</label>
+				<input class="form-control" id="add-aliases"  required></input>
 			</div>
 			<button type="submit" class="btn btn-primary">Create</button>
 			<a class="btn btn-default"> <router-link to="/">Cancel</router-link>
@@ -98,13 +100,17 @@
 		<h2>Edit person</h2>
 		<form @submit="updatePerson">
 			<div class="form-group">
-				<label for="edit-name">Title</label> <input class="form-control"
-					id="edit-name" v-model="person.title" required />
+				<label for="edit-firstName">First Name</label> <input class="form-control"
+					id="edit-name" v-model="person.firstName" required />
 			</div>
 			<div class="form-group">
-				<label for="edit-releaseyear">Release Year</label>
+				<label for="edit-firstName">Last Name</label> <input class="form-control"
+					id="edit-name" v-model="person.lastName" required />
+			</div>
+			<div class="form-group">
+				<label for="edit-aliases">Aliases</label>
 				<input class="form-control" id="edit-releaseyear" 
-					v-model="person.releaseYear" required></input>
+					v-model="person.aliases" required></input>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button>
 			<a class="btn btn-default"> <router-link to="/">Cancel</router-link>
@@ -115,7 +121,7 @@
 
 	<template id="person-delete">
 	<div>
-		<h2>Delete person {{ person.title }}</h2>
+		<h2>Delete person {{ person.firstName }} {{ person.lastName }}</h2>
 		<form @submit="deletePerson">
 			<p>The action cannot be undone.</p>
 			<button type="submit" class="btn btn-danger">Delete</button>

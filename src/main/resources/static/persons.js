@@ -57,7 +57,7 @@ var List = Vue.extend({
   computed: {
     filteredPersons() {
       return this.persons.filter((person) => {
-      	return person.title.indexOf(this.searchKey) > -1
+      	return person.firstName.indexOf(this.searchKey) > -1 || person.lastName.indexOf(this.searchKey) > -1 || person.aliases.indexOf(this.searchKey) > -1
       })
     }
   },
@@ -101,7 +101,7 @@ var AddPerson = Vue.extend({
   template: '#add-person',
   data() {
     return {
-      person: {title: '', releaseYear: ''}
+      person: {firstName: '', lastName: '', aliases:''}
     }
   },
   methods: {

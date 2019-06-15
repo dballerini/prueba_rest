@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.findo.prueba.model.Person;
@@ -34,8 +34,8 @@ public class PersonApiController {
 		return ResponseEntity.ok(personRepository.findAll());
 	}
 
-	@GetMapping(value = "/person")
-	public ResponseEntity<Person> getPerson(@RequestParam(value = "id") Long id) {
+	@GetMapping(value = "/person/{id}")
+	public ResponseEntity<Person> getPerson(@PathVariable Long id) {
 		Optional<Person> person = personRepository.findById(id);
 		if (!person.isPresent()) {
 			ResponseEntity.badRequest().build();
@@ -59,7 +59,7 @@ public class PersonApiController {
 	}
 
 	@DeleteMapping(value = "")
-	public ResponseEntity<Person> removePerson(@RequestParam(value = "id") Long id) {
+	public ResponseEntity<Person> removePerson(@PathVariable Long id) {
 		if (!personRepository.findById(id).isPresent()) {
 			ResponseEntity.badRequest().build();
 		}
