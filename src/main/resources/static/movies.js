@@ -1,7 +1,7 @@
 var movies = [];
 
 function findMovie(movieId) {
-  return movies[findMovieKey(movieId)];
+  return movies[findMoviesKey(movieId)];
 }
 
 function findMoviesKey (movieId) {
@@ -29,14 +29,14 @@ var movieService = {
 
   create(movie, fn) {
     axios
-      .post('/api/movies/',{ movie : movie})
+      .post('/api/movies/', movie)
       .then(response => fn(response))
       .catch(error => console.log(error))
   },
 
   update(id, movie, fn) {
     axios
-      .put('/api/movies/' + id, movie)
+      .put('/api/movies/', movie)
       .then(response => fn(response))
       .catch(error => console.log(error))
   },

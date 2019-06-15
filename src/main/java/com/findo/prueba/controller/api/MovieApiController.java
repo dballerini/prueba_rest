@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +35,8 @@ public class MovieApiController {
 		return ResponseEntity.ok(movieRepository.findAll());
 	}
 
-	@GetMapping(value = "/movie")
-	public ResponseEntity<Movie> getMovie(@RequestParam(value = "id") Long id) {
+	@GetMapping(value = "/movie/{id}")
+	public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
 		Optional<Movie> movie = movieRepository.findById(id);
 		if (!movie.isPresent()) {
 			ResponseEntity.badRequest().build();
@@ -58,8 +59,8 @@ public class MovieApiController {
 		return ResponseEntity.ok(movieRepository.save(movie));
 	}
 
-	@DeleteMapping(value = "")
-	public ResponseEntity<Movie> removeMovie(@RequestParam(value = "id") Long id) {
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Movie> removeMovie(@PathVariable Long id) {
 		if (!movieRepository.findById(id).isPresent()) {
 			ResponseEntity.badRequest().build();
 		}
