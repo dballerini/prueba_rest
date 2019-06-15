@@ -68,7 +68,7 @@ public class PersonApiController {
 	}
 
 	@ApiOperation(value = "Borra la persona", response = Movie.class)
-	@DeleteMapping(value = "")
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Person> removePerson(@ApiParam(value = "Id de la persona", required = true) @PathVariable Long id) {
 		if (!personRepository.findById(id).isPresent()) {
 			ResponseEntity.badRequest().build();

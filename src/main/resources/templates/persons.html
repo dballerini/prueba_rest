@@ -77,11 +77,11 @@
 		<h2>Add new person</h2>
 		<form @submit="createPerson">
 			<div class="form-group">
-				<label for="add-firstname">First Name</label> <input class="form-control"
+				<label for="add-firstName">First Name</label> <input class="form-control"
 					id="add-firstname" v-model="person.firstName" required />
 			</div>
 			<div class="form-group">
-				<label for="add-lastname">Last Name</label> <input class="form-control"
+				<label for="add-lastName">Last Name</label> <input class="form-control"
 					id="add-lastname" v-model="person.lastName" required />
 			</div>
 			<div class="form-group">
@@ -101,15 +101,15 @@
 		<form @submit="updatePerson">
 			<div class="form-group">
 				<label for="edit-firstName">First Name</label> <input class="form-control"
-					id="edit-name" v-model="person.firstName" required />
+					id="edit-firstName" v-model="person.firstName" required />
 			</div>
 			<div class="form-group">
-				<label for="edit-firstName">Last Name</label> <input class="form-control"
-					id="edit-name" v-model="person.lastName" required />
+				<label for="edit-lastName">Last Name</label> <input class="form-control"
+					id="edit-lastName" v-model="person.lastName" required />
 			</div>
 			<div class="form-group">
 				<label for="edit-aliases">Aliases</label>
-				<input class="form-control" id="edit-releaseyear" 
+				<input class="form-control" id="edit-aliases" 
 					v-model="person.aliases" required></input>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button>

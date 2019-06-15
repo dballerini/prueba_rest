@@ -43,7 +43,7 @@ var personService = {
 
   deletePerson(id, fn) {
     axios
-      .delete('/api/persons/' + id)
+      .delete('/api/persons/' + )
       .then(response => fn(response))
       .catch(error => console.log(error))
   }
