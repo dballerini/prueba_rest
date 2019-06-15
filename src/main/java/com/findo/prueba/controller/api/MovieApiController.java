@@ -14,29 +14,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.findo.prueba.model.Movie;
 import com.findo.prueba.repository.MovieRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/movies")
 @Slf4j
+@Api(value = "CRUD Movies", description = "Manejador de Peliculas")
 public class MovieApiController {
 
 	@Autowired
 	private MovieRepository movieRepository;
 
+	@ApiOperation(value = "Lista todas las peliculas", response = List.class)
 	@GetMapping(value = "")
 	public ResponseEntity<List<Movie>> index() {
 		return ResponseEntity.ok(movieRepository.findAll());
 	}
 
+	@ApiOperation(value = "Busca la pelicula por Id", response = List.class)
 	@GetMapping(value = "/movie/{id}")
-	public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
+	public ResponseEntity<Movie> getMovie(@ApiParam(value = "Id de la pelicula", required = true) @PathVariable Long id) {
 		Optional<Movie> movie = movieRepository.findById(id);
 		if (!movie.isPresent()) {
 			ResponseEntity.badRequest().build();
@@ -45,11 +50,13 @@ public class MovieApiController {
 		return ResponseEntity.ok(movie.get());
 	}
 
+	@ApiOperation(value = "Guarda la pelicula", response = Movie.class)
 	@PostMapping(value = "")
 	public ResponseEntity<Movie> addMovie(@Valid @RequestBody Movie movie) {
 		return ResponseEntity.ok(movieRepository.save(movie));
 	}
 
+	@ApiOperation(value = "Actualiza la pelicula", response = Movie.class)
 	@PutMapping(value = "")
 	public ResponseEntity<Movie> updateMovie(@Valid @RequestBody Movie movie) {
 		if (!movieRepository.findById(movie.getId()).isPresent()) {
@@ -59,8 +66,9 @@ public class MovieApiController {
 		return ResponseEntity.ok(movieRepository.save(movie));
 	}
 
+	@ApiOperation(value = "Borra la pelicula", response = Movie.class)
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Movie> removeMovie(@PathVariable Long id) {
+	public ResponseEntity<Movie> removeMovie(@ApiParam(value = "Id de la pelicula", required = true) @PathVariable Long id) {
 		if (!movieRepository.findById(id).isPresent()) {
 			ResponseEntity.badRequest().build();
 		}
