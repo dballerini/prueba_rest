@@ -12,6 +12,21 @@ function findMoviesKey (movieId) {
   }
 }
 
+var romanize =  function (num) {
+    if (isNaN(num))
+        return NaN;
+    var digits = String(+num).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+    while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
+}
+
+
 var movieService = {
   findAll(fn) {
     axios
@@ -63,6 +78,9 @@ var List = Vue.extend({
   },
   mounted() {
     movieService.findAll(r => {this.movies = r.data; movies = r.data})
+  },
+  methods: {
+	    romanize : romanize
   }
 });
 
@@ -70,7 +88,10 @@ var Movie = Vue.extend({
   template: '#movie',
   data: function () {
     return {movie: findMovie(this.$route.params.movie_id)};
-  }
+  },
+	methods: {
+		    romanize : romanize
+	}
 });
 
 var MovieEdit = Vue.extend({

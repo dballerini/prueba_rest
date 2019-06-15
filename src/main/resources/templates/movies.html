@@ -22,7 +22,7 @@
 	<div>
 		<h2>{{ movie.title }}</h2>
 		<b>Release Year: </b>
-		<div>{{ movie.releaseYear }}</div>
+		<div>{{ romanize(movie.releaseYear) }}</div>
 		<br /> <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
 		<a> <router-link to="/">Back to movie list</router-link>
 		</a>
@@ -59,7 +59,7 @@
 								:to="{name: 'movie', params: {movie_id: movie.id}}">{{
 							movie.title }}</router-link>
 					</a></td>
-					<td>{{ movie.releaseYear }}</td>
+					<td>{{ romanize(movie.releaseYear) }}</td>
 					
 					<td><a class="btn btn-warning btn-xs"> <router-link
 								:to="{name: 'movie-edit', params: {movie_id: movie.id}}">Edit</router-link>
